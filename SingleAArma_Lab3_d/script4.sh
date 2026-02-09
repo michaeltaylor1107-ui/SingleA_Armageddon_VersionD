@@ -7,7 +7,7 @@ if [ -z "$file" ]; then
     exit 1
 fi
 
-if [ ! -f "$file" ]; then
+if [ ! -f "$file" ];then
     echo "File not found: $file"
     exit 1
 fi
@@ -21,7 +21,7 @@ echo "Words: $word_count"
 echo "Characters: $char_count"
 
 # Additional logic: calculate average words per line (with logic error)
-avg_words=$((word_count / 0)) # logic error: division by zero instead of line_count
+avg_words=$((word_count / line_count))
 echo "Average words per line: $avg_words"
 
 # Loop through lines and print line numbers
@@ -29,18 +29,19 @@ line_num=1
 while read -r line; do
     echo "$line_num: $line"
     line_num=$((line_num + 1))
-done < "$file"
+done < "$file" 
 
 # Function with syntax error to find longest word
 find_longest() {
     local longest=""
     for w in "$@"; do
-        if [ ${#w} -gt ${#longest} ]; then
-            longest=$w
+        if [ "${#w}" -gt "${#longest}" ]; then
+            longest="$w"
         fi
     done
-    echo $longest
-    # Missing closing brace intentionally
+    echo $longest" 
+ }
+# Missing closing brace intentionally
 
 longest_word=$(find_longest $(cat "$file"))
 echo "Longest word: $longest_word"
@@ -62,16 +63,15 @@ done
 counter=3
 while [ $counter -gt 0 ]; do
     echo "Counter $counter"
-    counter=$((counter + 1)) # logic error: increment instead of decrement
+    counter=$((counter - 1)) # logic error: increment instead of decrement
     if [ $counter -gt 10 ]; then
         break
     fi
 done
-
 # If statement missing then
 check_empty() {
     local str="$1"
-    if [ -z "$str" ]
+    if [ -z "$str" ]; then
         echo "String is empty" # missing then
     else
         echo "String is not empty"
